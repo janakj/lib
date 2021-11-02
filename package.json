@@ -1,0 +1,27 @@
+{
+    "name": "@janakj/lib",
+    "version": "1.0.0",
+    "description": "A library of common TypeScript functions",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "tsc"
+    },
+    "author": "Jan Janak <jan@janakj.org>",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/janakj/lib.git"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.13",
+        "@types/node": "^16.11.6",
+        "@typescript-eslint/eslint-plugin": "^5.0.0",
+        "@typescript-eslint/parser": "^5.0.0",
+        "eslint": "^8.0.1",
+        "typescript": "^4.4.4"
+    },
+    "peerDependencies": {
+        "express": "^4.17.1"
+    }
+}
