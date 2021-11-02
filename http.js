@@ -20,6 +20,16 @@ export class ConflictError extends HttpError {
         super(message, code, reason);
     }
 }
+export class UnauthorizedError extends HttpError {
+    constructor(message, reason = 'Unauthorized', code = 401) {
+        super(message, code, reason);
+    }
+}
+export class ForbiddenError extends HttpError {
+    constructor(message, reason = 'Forbidden', code = 403) {
+        super(message, code, reason);
+    }
+}
 export function jsonifyError(res, error, includeStack = false) {
     const code = error.http_code || 500, reason = error.http_reason || 'Internal Server Error';
     res.statusMessage = reason;
@@ -53,4 +63,16 @@ export function jsonify(fn, includeStack = false) {
             }
         })();
     };
+}
+export async function throwForErrors(res) {
+    if (res.ok)
+        return;
+    let msg;
+    try {
+        const body = await res.json();
+        if (typeof body === 'object')
+            msg = body.message;
+    }
+    catch (error) { /* nothing */ }
+    throw new Error(msg || res.statusText);
 }

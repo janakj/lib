@@ -1,4 +1,5 @@
 import type { NextFunction, Request, Response } from 'express';
+import type { Response as FetchResponse } from 'node-fetch';
 
 
 export class HttpError extends Error {
@@ -28,6 +29,19 @@ export class ConflictError extends HttpError {
         super(message, code, reason);
     }
 }
+
+export class UnauthorizedError extends HttpError {
+    constructor(message?: string, reason='Unauthorized', code=401) {
+        super(message, code, reason);
+    }
+}
+
+export class ForbiddenError extends HttpError {
+    constructor(message?: string, reason='Forbidden', code=403) {
+        super(message, code, reason);
+    }
+}
+
 
 export function jsonifyError(res: Response, error: Error, includeStack=false) {
     const code = (error as HttpError).http_code || 500,
@@ -61,4 +75,15 @@ export function jsonify(fn: (req: Request, res: Response, next: NextFunction) =>
             }
         })();
     };
+}
+
+export async function throwForErrors(res: FetchResponse) {
+    if (res.ok) return;
+
+    let msg;
+    try {
+        const body = await res.json() as any;
+        if (typeof body === 'object') msg = body.message;
+    } catch(error) { /* nothing */ }
+    throw new Error(msg || res.statusText);
 }
