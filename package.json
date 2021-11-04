@@ -5,7 +5,7 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "tsc"
+        "build": "rm -rf build && tsc -p tsconfig.esm.json && tsc -p tsconfig.cjs.json && echo '{\"type\": \"commonjs\"}' > build/cjs/package.json"
     },
     "author": "Jan Janak <jan@janakj.org>",
     "license": "MIT",
@@ -30,5 +30,11 @@
         "express": "^4.17.1",
         "urijs": "^1.19.7",
         "uuid": "^8.3.2"
+    },
+    "exports": {
+        "./*": {
+            "require": "./build/cjs/*.js",
+            "import": "./build/esm/*.js"
+        }
     }
 }

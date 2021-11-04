@@ -30,8 +30,9 @@ export class ForbiddenError extends HttpError {
         super(message, code, reason);
     }
 }
-export function jsonifyError(res, error, includeStack = false) {
+export function jsonifyError(res, error, includeStack) {
     const code = error.http_code || 500, reason = error.http_reason || 'Internal Server Error';
+    const stack = typeof includeStack === 'boolean' ? includeStack : res.app.get('env') === 'development';
     res.statusMessage = reason;
     res.status(code);
     res.type('application/json');
@@ -39,10 +40,10 @@ export function jsonifyError(res, error, includeStack = false) {
         code,
         reason,
         message: error.message,
-        ...(includeStack && { stack: error.stack })
+        ...(stack && { stack: error.stack })
     });
 }
-export function jsonify(fn, includeStack = false) {
+export function jsonify(fn, includeStack) {
     return (req, res, next) => {
         void (async function () {
             try {
