@@ -1,11 +1,11 @@
 {
     "name": "@janakj/lib",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "A library of common TypeScript functions",
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "rm -rf build && tsc -p tsconfig.esm.json && tsc -p tsconfig.cjs.json && echo '{\"type\": \"commonjs\"}' > build/cjs/package.json"
+        "build": "rm -rf build && tsc -p tsconfig.json && tsc -p tsconfig.cjs.json && echo '{\"type\": \"commonjs\"}' > build/cjs/package.json"
     },
     "author": "Jan Janak <jan@janakj.org>",
     "license": "MIT",
