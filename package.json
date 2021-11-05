@@ -1,6 +1,6 @@
 {
     "name": "@janakj/lib",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "A library of common TypeScript functions",
     "private": true,
     "type": "module",
