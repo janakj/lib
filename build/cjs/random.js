@@ -16,7 +16,7 @@ exports.randomIntIncl = randomIntIncl;
  * https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
  *
  * This function shuffles the given array in-place.
- * */
+ */
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = (0, crypto_1.randomInt)(i + 1);
