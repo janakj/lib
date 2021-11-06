@@ -15,7 +15,7 @@ export function randomIntIncl(min: number, max: number) {
  * https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
  *
  * This function shuffles the given array in-place.
- * */
+ */
 export function shuffle(array: any[]){
     for (let i = array.length - 1; i > 0; i--) {
         const j = randomInt(i + 1);
